@@ -1,0 +1,6 @@
+{
+  "name": "المصرية للعقارات – مساكن شيراتون | El Masria Real Estate",
+  "description": "منصة وخدمات المصرية للعقارات في مساكن شيراتون ومصر الجديدة والنزهة ومدينة نصر (إيجار، تمليك، إداري، تجاري، مفروش ومحلات) مع استوديو لتصميم بوسترات وإعلانات السوشيال ميديا.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

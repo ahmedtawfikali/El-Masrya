@@ -1,0 +1,125 @@
+{
+  "entities": {
+    "property": {
+      "title": "Property",
+      "description": "Real estate property listing on Al Masreya Real Estate marketplace.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 200 },
+        "titleAr": { "type": "string", "maxLength": 200 },
+        "titleEn": { "type": "string", "maxLength": 200 },
+        "purpose": { "type": "string", "enum": ["sale", "rent"] },
+        "category": { "type": "string", "maxLength": 50 },
+        "area": { "type": "string", "maxLength": 50 },
+        "areaNameArabic": { "type": "string", "maxLength": 100 },
+        "areaNameEnglish": { "type": "string", "maxLength": 100 },
+        "subLocation": { "type": "string", "maxLength": 150 },
+        "price": { "type": "number" },
+        "priceFormatted": { "type": "string", "maxLength": 50 },
+        "priceUnit": { "type": "string", "maxLength": 50 },
+        "spaceM2": { "type": "number" },
+        "bedrooms": { "type": "number" },
+        "bathrooms": { "type": "number" },
+        "finishing": { "type": "string", "maxLength": 100 },
+        "featured": { "type": "boolean" },
+        "verifiedByAlMasreya": { "type": "boolean" },
+        "ownerType": { "type": "string", "maxLength": 50 },
+        "image": { "type": "string", "maxLength": 1000 },
+        "description": { "type": "string", "maxLength": 4000 },
+        "descriptionEn": { "type": "string", "maxLength": 4000 },
+        "coordinates": { "type": "object" },
+        "status": { "type": "string", "enum": ["active", "pending", "archived"] },
+        "creatorUid": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "purpose", "category", "area", "price", "spaceM2", "creatorUid"]
+    },
+    "inquiry": {
+      "title": "Inquiry",
+      "description": "User lead, contact request, or property consultation inquiry.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "inquiryType": { "type": "string", "enum": ["offer", "request", "consultation", "property_inquiry"] },
+        "propertyId": { "type": "string", "maxLength": 128 },
+        "propertyTitle": { "type": "string", "maxLength": 200 },
+        "propertyType": { "type": "string", "maxLength": 50 },
+        "area": { "type": "string", "maxLength": 100 },
+        "budgetOrPrice": { "type": "string", "maxLength": 50 },
+        "notes": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["new", "contacted", "closed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "phone", "inquiryType"]
+    },
+    "setting": {
+      "title": "Setting",
+      "description": "Official company and website configuration editable by admin.",
+      "type": "object",
+      "properties": {
+        "heroHeadlineAr": { "type": "string", "maxLength": 300 },
+        "heroHeadlineEn": { "type": "string", "maxLength": 300 },
+        "aboutAr": { "type": "string", "maxLength": 2000 },
+        "aboutEn": { "type": "string", "maxLength": 2000 },
+        "phones": { "type": "array" },
+        "addressAr": { "type": "string", "maxLength": 300 },
+        "addressEn": { "type": "string", "maxLength": 300 },
+        "workingHoursAr": { "type": "string", "maxLength": 100 },
+        "facebookUrl": { "type": "string", "maxLength": 500 },
+        "tiktokUrl": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["heroHeadlineAr", "addressAr"]
+    },
+    "userProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role assignment.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 200 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "photoURL": { "type": "string", "maxLength": 1000 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "role": { "type": "string", "enum": ["admin", "agent", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Authorized administrator document.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 200 },
+        "assignedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/properties/{propertyId}": {
+      "schema": { "$ref": "#/entities/property" },
+      "description": "Collection of all property listings."
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/inquiry" },
+      "description": "Collection of client leads and inquiry submissions."
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/setting" },
+      "description": "Site settings document store."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/userProfile" },
+      "description": "User profile document."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/admin" },
+      "description": "Authorized administrative accounts."
+    }
+  }
+}
